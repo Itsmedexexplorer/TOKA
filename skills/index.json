@@ -1,0 +1,52 @@
+[
+  {
+    "name": "job-search",
+    "description": "Find current job openings that match the user's role, location and skills, and save a shortlist to Excel.",
+    "category": "Career"
+  },
+  {
+    "name": "resume-tailor",
+    "description": "Tailor a resume and write a short cover letter for a specific job posting, keeping everything truthful.",
+    "category": "Career"
+  },
+  {
+    "name": "code-explainer",
+    "description": "Explain code, an error message or a stack trace in plain language, find the likely cause, and suggest a fix.",
+    "category": "Developer"
+  },
+  {
+    "name": "trip-planner",
+    "description": "Plan a trip day by day (places, timing, travel between them, rough budget), using live web search, and save it as a PDF.",
+    "category": "Life"
+  },
+  {
+    "name": "expense-tracker",
+    "description": "Build an Excel expense tracker with categories, monthly totals and a budget-vs-actual summary, optionally filled from pasted transactions.",
+    "category": "Money"
+  },
+  {
+    "name": "daily-planner",
+    "description": "Turn a to-do list into a realistic plan for today with time blocks, priorities and breaks.",
+    "category": "Productivity"
+  },
+  {
+    "name": "research-report",
+    "description": "Research a question across several sources and write a sourced report (summary, findings, comparison table, links) as a PDF or Word file.",
+    "category": "Research"
+  },
+  {
+    "name": "flashcards",
+    "description": "Make study flashcards and a short quiz from notes, a PDF, a web page or the video being watched.",
+    "category": "Study"
+  },
+  {
+    "name": "meeting-notes",
+    "description": "Turn a messy meeting transcript, recording summary or rough notes into clean notes with decisions, action items and owners, saved as a Word file.",
+    "category": "Work"
+  },
+  {
+    "name": "email-writer",
+    "description": "Draft a clear email or reply in the right tone (formal, friendly, firm), from a few words of intent or the email being answered.",
+    "category": "Writing"
+  }
+]
