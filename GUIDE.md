@@ -35,10 +35,13 @@ Built with **Tauri v2** (Rust + the system webview): the installer is a few MB a
 10. [Screen, keyboard and mouse](#screen-keyboard-and-mouse)
 11. [Approvals and safety](#approvals-and-safety)
 12. [Using TO'KA day to day](#using-toka-day-to-day)
-13. [Skills](#skills)
-14. [Troubleshooting](#troubleshooting)
-15. [Where TO'KA keeps its files](#where-toka-keeps-its-files)
-16. [Privacy and security](#privacy-and-security)
+13. [Skills and the skills gallery](#skills-and-the-skills-gallery)
+14. [Plugins: connect Notion, GitHub and more](#plugins-connect-notion-github-and-more)
+15. [Reminders and weather](#reminders-and-weather)
+16. [Teach TO'KA: it improves itself](#teach-toka-it-improves-itself)
+17. [Troubleshooting](#troubleshooting)
+18. [Where TO'KA keeps its files](#where-toka-keeps-its-files)
+19. [Privacy and security](#privacy-and-security)
 
 ---
 
@@ -54,12 +57,19 @@ Built with **Tauri v2** (Rust + the system webview): the installer is a few MB a
 | **Videos** | "Summarise this video": reads the transcript, description, chapters and top comments of the YouTube video you're watching, and knows how far you've got. |
 | **Music** | Learns your taste from what you play (kept on your computer), plays songs and mixes on YouTube Music, YouTube or Spotify, and can skip or pause. |
 | **Study help** | Stuck on a topic (say, a DSA problem)? It explains it, then finds and opens good videos for you. |
-| **Browser control** | Reads pages as a numbered list of buttons, links and fields; clicks, types, picks options, uploads files. Works in its own Chrome window or in **your everyday browser** through the TO'KA Bridge extension. |
+| **Browser control** | Reads pages as a numbered list of buttons, links and fields; clicks, types, picks options, uploads files. You **watch it work**: a TO'KA cursor glides to each button and clicks with a ripple, text types out letter by letter, and a soft glow with a status pill ("Clicking “Sign in”") frames the page until the task ends. Works in its own Chrome window or in **your everyday browser** through the TO'KA Bridge extension. |
 | **Documents** | Real `.docx` and `.xlsx` files (headings, lists, tables, working formulas), PDFs, and conversions with LibreOffice. |
 | **Desktop control** | Launches apps, opens files, looks at the screen, types and clicks (GNOME portal on Linux, native input on Windows). |
 | **CLI agents get TO'KA's tools** | A local MCP server lets Claude Code, Codex and Antigravity use TO'KA's browser, document, media and desktop tools inside their own agent loop. |
+| **Skills gallery** | Ten ready-made skills (meeting notes, resume tailoring, trip planning, flashcards…), installed with one click. New ones arrive without an app update. |
+| **Plugins** | Connect MCP servers such as Notion, GitHub, a folder or a knowledge graph. TO'KA and every CLI brain can then use their tools. |
+| **Reminders and weather** | *"Remind me at 6:30 to call mum"*, *"What's the weather in Pune?"* |
+| **Improves itself** | Ask it to change its look, remember a standing preference, learn a skill or add a plugin. |
+| **A character that reacts** | It listens with you, bobs to your music, looks around while browsing, gets curious when it needs your OK, and celebrates big tasks. |
 | **Skills** | Reusable instructions (`SKILL.md`) you run with `/skill-name`, or TO'KA picks them itself. |
-| **Approvals** | Choose which actions need your OK: commands, file writes, screen/keyboard, risky browser clicks (buy / send / delete). |
+| **Autopilot** | TO'KA just does the work. It stops for your OK only before paying, sending, deleting or changing the system, and not even then when that's what you asked for. Turn it off to choose exactly which actions need your OK. |
+| **Instant actions** | "Open YouTube", "play Tum Hi Ho", "pause", "next song", "open the terminal", "google …": done at once, without waiting for an AI. |
+| **Helper agents** | For big jobs TO'KA can split the work and hand parts to other AI CLIs you have installed (Claude Code, Codex, Gemini…), running them at the same time. |
 
 ---
 
@@ -117,6 +127,16 @@ It picks the right package for your system, installs it (you'll be asked for you
 Then start **TOKA** from the app menu, or run `toka`. Needs 64-bit Linux, Ubuntu 22.04 or newer (or similar). GNOME, KDE and most other desktops work.
 
 > **Wayland:** GNOME on Wayland doesn't let apps position themselves or stay on top, so TO'KA runs through XWayland automatically (built into GNOME). To force native Wayland anyway: `TOKA_WAYLAND=1 toka`.
+
+### Updating
+
+From version 1.3.0, TO'KA updates itself. A little after it starts (and every few hours), it checks for a new version. If there is one, a card appears in chat: click **Update now**. TO'KA downloads the update, checks its signature, installs it and restarts. Your settings, memory and skills stay. You can also check any time in **Settings → Updates → Check now**.
+
+- **Linux .deb / .rpm:** your system asks for your password to install the update.
+- **AppImage:** the file is replaced in place.
+- **Windows:** the installer runs by itself with a small progress window.
+
+Coming from **1.2.0 or older?** Those versions can't update themselves. Install once more using the steps above (same link, or the one-line installer); after that, updates are automatic.
 
 ### Recommended extras (both systems)
 
@@ -321,8 +341,8 @@ On Windows you can load it straight from `%LOCALAPPDATA%\TOKA\extension`.
 1. Open the chat (double-tap the character, or click the notch).
 2. Click the **mic** button next to Send, or press **Ctrl+Space**.
 3. **First time only:** TO'KA offers to download a speech model. Click **Download · 190 MB** (best for most people) or **Faster · 59 MB** (for older computers). It's a one-time download.
-4. Talk. The mic glows and its ring follows your voice.
-5. **Pause** for about a second when you're done. TO'KA turns your speech into text and sends it.
+4. Talk. The mic glows, its ring follows your voice, and your words appear as you speak.
+5. **Pause** for about a second when you're done. TO'KA sends what you said straight away: it was turning your speech into text while you talked.
 
 | While listening | |
 |---|---|
@@ -401,7 +421,16 @@ Ask *"I'm stuck on this LeetCode problem"* or *"I don't get dynamic programming,
 
 ## Approvals and safety
 
-Settings → **Ask before TO'KA…** lets you choose which actions need your OK:
+**Autopilot** (Settings → Approvals, on by default) lets TO'KA work without stopping. It asks only before:
+
+- clicking buy / pay / send / post / delete / submit buttons, **unless your request asked for exactly that** ("send the email to Sam", "buy the blue one");
+- commands that delete files, run as administrator, uninstall software, restart the computer or close programs, **unless your request asked for that** ("clean up my cache", "install VLC");
+- writing into system folders (`/etc`, `C:\Windows`…);
+- plugin actions the plugin marks as destructive, and changes to TO'KA itself.
+
+A few commands always ask, even after *Allow for this chat*: wiping a disk, deleting your whole home folder, or running a script straight from the internet (`curl … | bash`).
+
+Turn Autopilot off to pick yourself which actions need your OK:
 
 - runs terminal commands
 - writes files
@@ -437,11 +466,27 @@ When approval is needed, a card appears in chat with **Deny / Allow for this cha
 - *"Open this page and fill in the form for me: https://…"*
 - *"What's on my current tab?"* (with the browser extension)
 
-Steps show live in the chat, and the **Stop** button cancels a running task, including a running CLI.
+Steps show live in the chat, and the **Stop** button cancels a running task, including a running CLI. Sending a new message while TO'KA is working stops the current task and starts the new one.
+
+**Why some requests are instant and others take a while:** everyday one-step requests (open a site, app or folder; play, pause or skip; search Google or YouTube) run immediately. Everything else goes to the brain you picked. Cloud API brains (Groq, Gemini, Anthropic, OpenAI) answer fastest; CLI agents need about 5 to 10 seconds just to start, then a few seconds per step.
 
 ---
 
-## Skills
+## Skills and the skills gallery
+
+**Gallery:** Settings → **Skills gallery** (or the **Gallery** button in the notch's Skills panel). Filter by category, **Preview** what a skill tells TO'KA to do, and **Install** it. Then type `/name` in chat, or just ask; for example *"plan a 3-day trip to Goa"* picks `trip-planner` once it's installed. You can also ask TO'KA *"what skills can you learn?"* or *"install the flashcards skill"*.
+
+| Category | Skills |
+|---|---|
+| Work | `meeting-notes` |
+| Writing | `email-writer` |
+| Career | `resume-tailor`, `job-search` |
+| Life | `trip-planner` |
+| Productivity | `daily-planner` |
+| Money | `expense-tracker` |
+| Study | `flashcards` |
+| Research | `research-report` |
+| Developer | `code-explainer` |
 
 Skills are folders with a `SKILL.md` file (name, description and instructions) in TO'KA's data folder. Open the folder with Settings → **Open skills folder**.
 
@@ -450,6 +495,50 @@ Skills are folders with a `SKILL.md` file (name, description and instructions) i
 - Ask TO'KA to *"save this as a skill"* and it writes one for you.
 
 Built-in skills: `web-research`, `browser-tasks`, `desktop-apps`, `write-skill`, `video-summary`, `music-taste`, `study-help`. New built-ins are added to existing installs automatically. If you delete one, it stays deleted.
+
+---
+
+## Plugins: connect Notion, GitHub and more
+
+Plugins are [MCP servers](https://modelcontextprotocol.io), the same plug-in format Claude Desktop, Cursor and others use. Once one is connected, TO'KA and every CLI brain can use its tools (named like `notion__search`).
+
+1. Settings → **Plugins** → **Add a plugin**.
+2. Pick one:
+
+   | Plugin | What it does | Needs |
+   |---|---|---|
+   | **Folder access** | Read, search and edit files in one folder you choose, and nowhere else | Node.js |
+   | **Knowledge graph** | A long-term memory of people, projects and facts | Node.js |
+   | **Notion** | Search, read and create pages and databases | Node.js and a Notion integration token ([create one](https://www.notion.so/profile/integrations), then share pages with it) |
+   | **GitHub** | Issues, pull requests, code search | Docker and a [fine-grained token](https://github.com/settings/personal-access-tokens) |
+   | **Step-by-step thinking** | Helps with hard, multi-step problems | Node.js |
+   | **Custom** | Any MCP server that runs as a command, e.g. `npx -y some-mcp-server` | Whatever that server needs |
+
+3. Fill in the fields and press **Connect**. The first start can take a minute while it downloads. You'll see **On · N tools**, or an error with **Retry**.
+
+Plugins start by themselves whenever TO'KA starts. Untick one to turn it off, or press **Remove**.
+
+**Safety:** TO'KA asks before a plugin *changes* something (Settings → Approvals → *uses a plugin to change something*). Tools that the plugin marks as read-only never ask. Tokens stay in TO'KA's data folder, and TO'KA never asks for them in chat. Only add servers you trust: a plugin runs on your computer with your permissions.
+
+---
+
+## Reminders and weather
+
+- *"Remind me in 20 minutes to stretch"*, *"Remind me at 6:30pm to call mum"*, *"Remind me tomorrow at 9 to send the report"*. You get a desktop notification and the character pops up. Reminders survive restarts, and one that came due while TO'KA was closed shows up when it next starts. Ask *"what reminders do I have?"* or *"cancel the stretch reminder"*.
+- *"What's the weather in Pune?"* gives the current weather and a 3-day forecast, from [Open-Meteo](https://open-meteo.com) (free, no account).
+
+---
+
+## Teach TO'KA: it improves itself
+
+Ask in chat, and TO'KA changes itself in ways that are always easy to undo:
+
+| Ask | What happens | Undo |
+|---|---|---|
+| *"Make the notch dark blue"*, *"bigger text"*, *"make yourself green"* | Changes its theme (accent, notch, panel, text size, character colour) | Settings → Make TO'KA yours → **Reset look** |
+| *"From now on keep replies short"*, *"call me Dhanesh"* | Adds a **standing instruction** that every brain follows. It asks you first. | Edit or clear it in Settings → Make TO'KA yours |
+| *"Learn the meeting-notes skill"*, *"save how we just did that as a skill"* | Installs a gallery skill or writes a new one | Delete the skill's folder |
+| *"Connect a knowledge graph"*, *"give yourself access to ~/Projects"* | Adds a plugin. It asks you first. | Settings → Plugins → **Remove** |
 
 ---
 
@@ -489,6 +578,7 @@ Built-in skills: `web-research`, `browser-tasks`, `desktop-apps`, `write-skill`,
 | Memory about you | `memory.json` | same folder |
 | Listening history, daily usage | `store/media-history.json`, `store/usage.json` | same folder |
 | Skills | `skills/` | same folder |
+| Plugins, reminders | `store/plugins.json`, `store/reminders.json` | same folder |
 | Voice models | `voice/` | same folder |
 | TO'KA's own browser profile | `browser-profile/` | same folder |
 | App files | `/usr/lib/TOKA/` (`.deb`) | `%LOCALAPPDATA%\TOKA\` |

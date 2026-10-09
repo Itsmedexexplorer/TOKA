@@ -61,6 +61,8 @@ That's it: it picks the right package for your system, asks for your password on
 | Any other | [TOKA-linux-amd64.AppImage](https://github.com/Itsmedexexplorer/TOKA/releases/latest/download/TOKA-linux-amd64.AppImage) | Right-click → Properties → *Allow executing*, then double-click |
 </details>
 
+**Already have TO'KA?** From 1.3 on it updates itself (Settings → Updates). On 1.2 or older, install once more the same way.
+
 **Needs:** Windows 10 or 11, or 64-bit Linux (Ubuntu 22.04 or newer, or similar).
 
 ---
@@ -107,6 +109,14 @@ The **Live** panel shows the AI's thinking, its plan as a checklist, its next mo
 | **Documents** | Real Word, Excel and PDF files. |
 | **Your desktop** | Opens apps and files, looks at the screen, types and clicks, asking first if you want it to. |
 | **Two looks** | A floating character, or a black notch at the top of the screen. |
+| **Autopilot** | Just does the work. It stops for your OK only before paying, sending, deleting or changing the system, and not even then when that's what you asked for. |
+| **Instant actions** | *"Open YouTube"*, *"play Tum Hi Ho"*, *"pause"*, *"open the terminal"*: done at once, without waiting for an AI. |
+| **Helper agents** | Big jobs can be split across the other AI tools you have installed, running at the same time. |
+| **Skills gallery** | Ready-made skills (meeting notes, resume tailoring, trip planning, flashcards…), one click to install. |
+| **Plugins** | Connect Notion, GitHub, a folder or a knowledge graph, and TO'KA can use them. |
+| **Reminders and weather** | *"Remind me at 6:30 to call mum"*, *"What's the weather in Pune?"* |
+| **Improves itself** | Ask it to change its look, remember a preference, learn a skill or add a plugin. |
+| **Updates itself** | From 1.3 on, new versions install with one click. |
 
 Everything is explained in the **[user guide](GUIDE.md)**.
 
@@ -117,7 +127,7 @@ Everything is explained in the **[user guide](GUIDE.md)**.
 - TO'KA runs on your computer. Your messages go only to the AI you pick.
 - Voice is turned into text on your computer; audio is never saved or uploaded.
 - Your settings, keys, memory and listening history stay in your own folder.
-- You choose which actions need your OK first: commands, files, screen and keyboard, and risky clicks like buy or send.
+- On autopilot it asks before paying, sending, deleting or changing your system. Turn autopilot off to choose exactly which actions need your OK.
 
 ## Help
 
